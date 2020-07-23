@@ -1,0 +1,285 @@
+<%- include("partials/header") %>
+
+<div class="inner">
+
+<h1>
+	<%= newTime.event + " " + newTime.stroke %> 
+</h1>
+
+<% var minutes = Number(newTime.minutes) %>
+<% var seconds = Number(newTime.seconds) %>
+<% var milliseconds = Number(newTime.milliseconds) %>
+
+<% function tableHeader(){ %>
+	<thead class="thead-light">
+		<th>Distance</th>
+		<% for(var i = 100; i >= 60; i -= 5){ %>
+			<th><%=i%>%</th>
+		<% } %>
+	</thead>
+<% } %>
+
+<% function quarter(){ %>
+	<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+		<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * 0.25).toFixed(1) %>
+		<% if(result < 60){ %>
+			<td><%= result %></td>
+		<% } else { %>
+			<% let time = 0 %>
+			<% while(result >= 60){ %>
+				<% result -= 60 %>
+				<% time++ %>
+			<% } %>
+			<% if(result < 10){ %>
+				<td><%= time %>:0<%= result.toFixed(1) %></td>
+			<% } else { %>
+				<td><%= time %>:<%= result.toFixed(1) %></td>
+			<% } %>
+		<% } %>
+	<% } %>
+<% } %>
+	
+<% function half(){ %>
+	<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+		<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * 0.50).toFixed(1) %>
+		<% if(result < 60){ %>
+			<td><%= result %></td>
+		<% } else { %>
+			<% let time = 0 %>
+			<% while(result >= 60){ %>
+				<% result -= 60 %>
+				<% time++ %>
+			<% } %>
+			<% if(result < 10){ %>
+				<td><%= time %>:0<%= result.toFixed(1) %></td>
+			<% } else { %>
+				<td><%= time %>:<%= result.toFixed(1) %></td>
+			<% } %>
+		<% } %>
+	<% } %>
+<% } %>
+	
+<% function eighth(){ %>
+	<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+		<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * 0.125).toFixed(1) %>
+		<% if(result < 60){ %>
+			<td><%= result %></td>
+		<% } else { %>
+			<% let time = 0 %>
+			<% while(result >= 60){ %>
+				<% result -= 60 %>
+				<% time++ %>
+			<% } %>
+			<% if(result < 10){ %>
+				<td><%= time %>:0<%= result.toFixed(1) %></td>
+			<% } else { %>
+				<td><%= time %>:<%= result.toFixed(1) %></td>
+			<% } %>
+		<% } %>
+	<% } %>
+<% } %>
+
+<% function sixteenth(){ %>
+	<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+		<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * 0.0625).toFixed(1) %>
+		<% if(result < 60){ %>
+			<td><%= result %></td>
+		<% } else { %>
+			<% let time = 0 %>
+			<% while(result >= 60){ %>
+				<% result -= 60 %>
+				<% time++ %>
+			<% } %>
+			<% if(result < 10){ %>
+				<td><%= time %>:0<%= result.toFixed(1) %></td>
+			<% } else { %>
+				<td><%= time %>:<%= result.toFixed(1) %></td>
+			<% } %>
+		<% } %>
+	<% } %>
+<% } %>
+	
+<% function goalTime(){ %>
+	<h4>Goal Time: <%= minutes %>m <%= seconds %>s <%= milliseconds %>ms  </h4>
+<% } %>
+
+
+
+<% if(newTime.event === "100"){ %> 
+	<% goalTime() %>
+	<table class="table">
+		<% tableHeader() %>
+		<tr>
+			<td>25m</td>
+			<% quarter() %>
+		</tr>
+		<tr>
+			<td>50m</td>
+			<% half() %>
+		</tr>
+	</table>
+<% } else if(newTime.event === "200"){ %>
+	<% goalTime() %>
+	<table class="table">
+		<% tableHeader() %>
+		<tr>
+			<td>25m</td>
+			<% eighth() %>
+		</tr>
+		<tr>
+			<td>50m</td>
+			<% quarter() %>
+		</tr>
+		<tr>
+			<td>100m</td>
+			<% half() %>
+		</tr>
+	</table>
+<% } else if(newTime.event === "400") { %>
+	<% goalTime() %>
+	<table class="table">
+		<% tableHeader() %>
+		<tr>
+			<td>25m</td>
+			<% sixteenth() %>
+		</tr>
+		
+		<tr>
+			<td>50m</td>
+			<% eighth() %>
+		</tr>
+		
+		<tr>
+			<td>100m</td>
+			<% quarter() %>
+		</tr>
+		
+		<tr>
+			<td>200m</td>
+			<% half() %>
+		</tr>
+	</table>
+<% } else if(newTime.event === "800") { %>
+	<% goalTime() %>
+	<table class="table">
+		<% tableHeader() %>
+		<tr>
+			<td>50m</td>
+			<% sixteenth() %>
+		</tr>
+		
+		<tr>
+			<td>100m</td>
+			<% eighth() %>
+		</tr>
+		
+		<tr>
+			<td>200m</td>
+			<% quarter() %>
+		</tr>
+		
+		<tr>
+			<td>400m</td>
+			<% half() %>
+		</tr>
+	</table>
+<% } else { %>
+	<% goalTime() %>
+	<table class="table">
+		<% tableHeader() %>
+		<tr>
+			<td>50m</td>
+			<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+				<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * (1/30)).toFixed(1) %>
+				<% if(result < 60){ %>
+					<td><%= result %></td>
+				<% } else { %>
+					<% let time = 0 %>
+					<% while(result >= 60){ %>
+						<% result -= 60 %>
+						<% time++ %>
+					<% } %>
+					<% if(result < 10){ %>
+						<td><%= time %>:0<%= result.toFixed(1) %></td>
+					<% } else { %>
+						<td><%= time %>:<%= result.toFixed(1) %></td>
+					<% } %>
+				<% } %>
+			<% } %>
+		</tr>
+		
+		<tr>
+			<td>100m</td>
+			<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+				<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * (1/15)).toFixed(1) %>
+				<% if(result < 60){ %>
+					<td><%= result %></td>
+				<% } else { %>
+					<% let time = 0 %>
+					<% while(result >= 60){ %>
+						<% result -= 60 %>
+						<% time++ %>
+					<% } %>
+					<% if(result < 10){ %>
+						<td><%= time %>:0<%= result.toFixed(1) %></td>
+					<% } else { %>
+						<td><%= time %>:<%= result.toFixed(1) %></td>
+					<% } %>
+				<% } %>
+			<% } %>
+		</tr>
+		
+		<tr>
+			<td>200m</td>
+			<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+				<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * (2/15)).toFixed(1) %>
+				<% if(result < 60){ %>
+					<td><%= result %></td>
+				<% } else { %>
+					<% let time = 0 %>
+					<% while(result >= 60){ %>
+						<% result -= 60 %>
+						<% time++ %>
+					<% } %>
+					<% if(result < 10){ %>
+						<td><%= time %>:0<%= result.toFixed(1) %></td>
+					<% } else { %>
+						<td><%= time %>:<%= result.toFixed(1) %></td>
+					<% } %>
+				<% } %>
+			<% } %>
+		</tr>
+		
+		<tr>
+			<td>400m</td>
+			<% for(var i = 1.00; i <= 1.45; i += 0.05){ %>
+				<% var result = ((((minutes * 60) + seconds + (milliseconds / 100)) * i) * (4/15)).toFixed(1) %>
+				<% if(result < 60){ %>
+					<td><%= result %></td>
+				<% } else { %>
+					<% let time = 0 %>
+					<% while(result >= 60){ %>
+						<% result -= 60 %>
+						<% time++ %>
+					<% } %>
+					<% if(result < 10){ %>
+						<td><%= time %>:0<%= result.toFixed(1) %></td>
+					<% } else { %>
+						<td><%= time %>:<%= result.toFixed(1) %></td>
+					<% } %>
+				<% } %>
+			<% } %>
+		</tr>
+	</table>
+<% } %>
+
+<div class="d-flex justify-content-center">
+	<a class="btn btn-primary no-print" href="/">Back to Home</a>
+	<a class="btn btn-info no-print" href="/form">Enter another time</a>
+	<input class="btn btn-warning no-print" type="button" value="Print this form" onclick="window.print()">
+</div>
+	
+</div>
+
+
+<%- include("partials/footer") %>

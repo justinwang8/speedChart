@@ -1,0 +1,53 @@
+<%- include("partials/header") %>
+
+<div class="jumbotron d-flex flex-column align-items-center">
+	
+    <!-- Title -->
+    <h1>Pace Calculator</h1>
+
+    <!-- Description -->
+    <p>Choose an event and enter your goal time(MINUTES:SECONDS.MILLISECONDS)</p>
+
+
+<form action="/form" method="POST">
+	<!-- Event Select Div -->
+    <div class="d-flex justify-content-center">
+        <select name="event" required>
+            <option value="">meters</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="400">400</option>
+            <option value="800">800</option>
+            <option value="1500">1500</option>
+        </select>
+        <select name="stroke" required>
+            <option value="">stroke</option>
+            <option value="Fly">FL</option>
+            <option value="Back">BK</option>
+            <option value="Breast">BR</option>
+            <option value="Free">FR</option>
+        </select>
+    </div>
+
+    <!-- Time Entry -->
+    <input type="number" min="0" max="99" name="minutes" placeholder="MM">
+    <span>:</span>
+    <input type="number" min="0" max="99" name="seconds" placeholder="SS">
+    <span>.</span>
+    <input type="number" min="0" max="99" name="milliseconds" placeholder="MS">
+    <div class="d-flex justify-content-center">
+        <input class="btn btn-primary" type="submit">
+    </div>
+	
+</form>
+
+
+	<a class="btn btn-info" href="/">Back to Home</a>
+
+
+
+</div>
+
+
+<%- include("partials/footer") %>
+    
