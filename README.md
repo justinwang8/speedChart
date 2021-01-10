@@ -12,12 +12,8 @@ speedChart is a website created for competitive swimmers who have a goal time th
 
 Can't remember your chart during practice? No problem. speedChart has a print button which allows you to print your chart and bring it to the pool.
 
-
-
-#### Can I Expect More Things to Come From speedChart?
-
-Yes! speedChart is currently working on implementing Authentication and a Database which will allow for User Login/Signup as well as the ability to save your charts. Stay Tuned!
-
 ![Screen Shot 2021-01-10 at 4 20 57 PM](https://user-images.githubusercontent.com/64336791/104135768-002f5580-5360-11eb-82fa-55775b1aa435.png)
+
+![Screen Shot 2021-01-10 at 4 21 14 PM](https://user-images.githubusercontent.com/64336791/104135790-21904180-5360-11eb-8ac4-8673ea70d2f9.png)
 
 
